@@ -1,0 +1,11 @@
+---
+#roles:
+  # Install a role from Ansible Galaxy.
+  #  - name: 
+  #  version: 
+
+collections:
+  # Install a collection from Ansible Galaxy.
+  - name: community.general
+    version: 1.1.0
+    source: https://galaxy.ansible.com

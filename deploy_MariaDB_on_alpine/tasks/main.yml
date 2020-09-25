@@ -1,2 +1,42 @@
 ---
 # tasks file for deploy_MariaDB_on_alpine
+#
+#
+- name: uncomment a repo community
+  replace:
+         path: /etc/apk/repositories
+         backup: yes
+         regexp: '^#(.*[0-9]./community.*)'
+         replace: '\1'
+
+- name:  install MariaDB
+  apk:
+    name:  [ mariadb, mariadb-client, mariadb-connector-c ]
+    state: present
+
+- find: paths=/var/lib/mysql 
+  register: dir_files
+
+- shell: /etc/init.d/mariadb setup
+  when: dir_files.matched|int  < 1 
+
+- name: service  MariaDB configuration
+  service:
+    name: mariadb
+    state: started
+    enabled: true
+
+- name:  install python
+  apk:
+    name:  python2
+    state: present
+
+      
+- name: Install  python support MariaDB  from a 3.10 community repository
+  community.general.apk:
+    name: py-mysqldb
+    state: latest
+    update_cache: yes
+    repository: http://mirror.yandex.ru/mirrors/alpine/v3.10/community
+
+

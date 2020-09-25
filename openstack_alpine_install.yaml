@@ -6,5 +6,16 @@
 
 
   roles: 
-    - {  role: deploy_openstack_on_alpine, when: ansible_system == "Linux" }
+   -  deploy_MariaDB_on_alpine
+   -  deploy_Keystone_on_alpine
+   -  deploy_Glance_on_alpine
+   -  deploy_Cinder_on_alpine
+   -  deploy_Swift_on_alpine
+   -  deploy_Nova_on_alpine
+   -  deploy_KVM_on_alpine
+   -  deploy_Neutron_on_alpine
+   -  deploy_Horizon_on_alpine
+   -  deploy_Heat_on_alpine
+   -  deploy_Ceilometr_on_alpine
+
 
