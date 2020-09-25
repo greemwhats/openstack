@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include deploy_Cinder_on_alpine"
+      include_role:
+        name: "deploy_Cinder_on_alpine"

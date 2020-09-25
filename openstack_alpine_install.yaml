@@ -1,0 +1,10 @@
+---
+- name: install openstack on alpine-3.12
+  hosts: openstack-1
+  remote_user: testuser
+  become: true
+
+
+  roles: 
+    - {  role: deploy_openstack_on_alpine, when: ansible_system == "Linux" }
+

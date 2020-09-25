@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include deploy_Neutron_on_alpine"
+      include_role:
+        name: "deploy_Neutron_on_alpine"
