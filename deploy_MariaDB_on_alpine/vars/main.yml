@@ -1,2 +1,4 @@
 ---
 # vars file for deploy_MariaDB_on_alpine
+mysql_root_password: "TestTest2020"
+ansible_fqdn:        "openstack-1.company.off"
