@@ -14,6 +14,12 @@
     name:  [ mariadb, mariadb-client, mariadb-connector-c ]
     state: present
 
+- name: add mariadb-server.cnf from templates
+  template:
+    src: mariadb-server.cnf.j2 
+    dest: /etc/my.cnf.d/mariadb-server.cnf
+    mode: 0644
+
 - find: paths=/var/lib/mysql 
   register: dir_files
 
