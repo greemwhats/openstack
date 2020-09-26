@@ -1,0 +1,4 @@
+---
+# vars file for deploy_RabbitMQ_on_alpine
+
+rabbitmq_guest_user_pass: "rabb1tmqpass"

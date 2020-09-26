@@ -1,0 +1,46 @@
+---
+# tasks file for deploy_RabbitMQ_on_alpine
+#
+
+- name: Install erlang-tools  from a 3.11 community repository
+  community.general.apk:
+    name: [ erlang-tools, erlang-runtime-tools, erlang-stdlib, erlang-ssl, erlang-crypto, erlang-parsetools, erlang-mnesia, erlang-sasl, erlang-inets, erlang-inets, erlang-eldap, erlang-xmerl, erlang-os-mon, erlang-asn1, erlang-public-key ]
+    state: latest
+    update_cache: yes
+    repository: http://mirror.yandex.ru/mirrors/alpine/v3.11/community
+
+- name: Install logrotate 
+  community.general.apk:
+    name:  logrotate
+    state: latest
+    update_cache: yes
+
+- name: Install  RabbitMQ  from a testing community repository
+  community.general.apk:
+    name: rabbitmq-server
+    state: latest
+    update_cache: yes
+    repository: http://mirror.yandex.ru/mirrors/alpine/edge/testing
+
+
+- name:  Insert RabbitMQ configuration rabbitmq.config    
+  copy: 
+    content: '[{rabbit, [{loopback_users, []}]}].' 
+    dest: "/etc/rabbitmq/rabbitmq.config"
+
+      #- name: Allow the guest account to connect from outside the localhost
+  # community.rabbitmq.rabbitmq_user:
+  #  user: guest
+  #  password: "{{ rabbitmq_guest_user_pass }}"
+  #  state: present
+
+- name: change password for guest user in RabbitMQ
+  shell: rabbitmqctl change_password guest "{{ rabbitmq_guest_user_pass }}"
+
+- name: service RabbitMQ configuration
+  service:
+    name: rabbitmq-server
+    state: started
+    enabled: true
+
+
