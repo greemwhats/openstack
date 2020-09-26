@@ -76,4 +76,16 @@
     update_cache: yes
     repository: http://mirror.yandex.ru/mirrors/alpine/v3.10/community
 
+- name: Create a new database with name 'keystone'
+  community.mysql.mysql_db:
+    name: keystone
+    state: present
 
+- name: Create user keystone  for localhost
+  community.mysql.mysql_user:
+    name: 'keystone'
+    host: localhost
+    password: "{{ keystone_mariadb_password }}"
+    priv: 'keystone.*:ALL,GRANT'
+    state: present
+  no_log: True

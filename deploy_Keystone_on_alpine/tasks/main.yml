@@ -1,2 +1,34 @@
 ---
 # tasks file for deploy_Keystone_on_alpine
+#
+#
+
+- name: Install  Keystone from a testing community repository
+  community.general.apk:
+    name: keystone
+    state: latest
+    update_cache: yes
+    repository: http://mirror.yandex.ru/mirrors/alpine/edge/testing
+
+- name: install pip3
+  apk: 
+    name: py3-pip
+    state: present
+
+- name: Install setuptools
+  apk:
+    name: [ py2-setuptools, py3-wheel, py3-netifaces ]
+    state: present
+
+- name: Install python-keystoneclient
+  pip:
+    name: python-keystoneclient
+
+- name: generate the admin token
+  shell: "openssl rand -hex 10"
+  register: token
+  environment: 
+     OS_SERVICE_TOKEN: "{{ token.stdout }}"
+    
+- debug: 
+    msg: "{{ token.stdout }}"

@@ -1,2 +1,4 @@
 ---
 # vars file for deploy_Keystone_on_alpine
+#
+OS_SERVICE_TOKEN: ""

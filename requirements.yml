@@ -11,9 +11,18 @@ collections:
     source: https://galaxy.ansible.com
 
 
-collections:
   # Install a collection from Ansible Galaxy.
   - name: community.rabbitmq
     version: 1.0.1
     source: https://galaxy.ansible.com
 
+  # Install a collection from Ansible Galaxy.
+  - name: community.mysql
+    # version: 1.0.1
+    source: https://galaxy.ansible.com
+
+
+  # Install a collection from Ansible Galaxy.
+  - name: community.crypto
+    # version: 1.0.1
+    source: https://galaxy.ansible.com
